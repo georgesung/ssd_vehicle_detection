@@ -3,6 +3,10 @@ Global settings
 '''
 import tensorflow as tf
 
+# KITTI evaluation
+KITTI_EVAL = True  # evaluating on KITTI dataset?
+KITTI_EVAL_SHOW_IMAGE = False  # show images for debug?
+KITTI_ROOT = 'kitti_test/'  # KITTI data root directory
 
 # Default boxes
 # DEFAULT_BOXES = ((x1_offset, y1_offset, x2_offset, y2_offset), (...), ...)
@@ -27,7 +31,10 @@ NMS_IOU_THRESH = 0.2  # IOU threshold for non-max suppression
 NEG_POS_RATIO = 5  # negative:positive = NEG_POS_RATIO:1
 
 # Class confidence threshold to count as detection
-CONF_THRESH = 0.95
+if KITTI_EVAL:
+	CONF_THRESH = 0.0  # we want to show all boxes and print their confidence for KITTI evaluation script
+else:
+	CONF_THRESH = 0.95
 
 # Model selection and dependent parameters
 MODEL = 'AlexNet'  # AlexNet/VGG16/ResNet50
